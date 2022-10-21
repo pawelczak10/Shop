@@ -16,7 +16,7 @@ interface StoreApiResponse{
 }
 
 const getProducts= async () => {
-  const res = await fetch("http://localhost:3000/json/api/offers?fields=id");
+  const res = await fetch("https://fakestoreapi.com/products/");
   const data:StoreApiResponse[] = await res.json()
   return data
 
