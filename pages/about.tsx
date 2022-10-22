@@ -4,9 +4,7 @@ import { Main } from "../components/Main";
 const About = () => {
   return (
       <div className="flex flex-col min-h-screen">
-        <Header></Header>
-        <Main>CZESC ZIOM</Main>
-        <Footer></Footer>
+        <Main>Cześć, jestem paweł</Main>
       </div>
   );
 };

@@ -13,15 +13,10 @@ const DATA = {
 };
 
 const Home = () => {
-  return (
-    <div className="flex flex-col min-h-screen">
-        <Header />
-        <Main>
-          <ProductListItem data={DATA} />
+  return <Main>
+          {/* <ProductListItem data={DATA} /> */}
         </Main>
-        <Footer />
-    </div>
-  );
+        
 };
 
 export default Home;
