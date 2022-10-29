@@ -2,6 +2,7 @@ import { GetStaticPropsContext } from "next";
 import { InferGetStaticPropsType } from "next";
 import Link from "next/link";
 import { ProductDetails } from "../../components/Product";
+import { serialize } from "next-mdx-remote/serialize";
 
 const ProductIdPages = ({
   data,
@@ -13,9 +14,8 @@ const ProductIdPages = ({
   return (
     <div>
       <Link href="/products">
-      <a>
-       Wroc na strone glowna 
-        </a></Link>
+        <a>Wroc na strone glowna</a>
+      </Link>
       <ProductDetails
         data={{
           id: data.id,
@@ -23,7 +23,7 @@ const ProductIdPages = ({
           urlAdres: data.image,
           description: data.description,
           rating: data.rating.rate,
-          longDescription: data.longDescription
+          longDescription: data.longDescription,
         }}
       />
     </div>
@@ -62,9 +62,16 @@ export const getStaticProps = async ({
   );
   const data: StoreApiResponse | null = await res.json();
 
+  if (!data) {
+    return {
+      props: {},
+      notFound: true,
+    };
+  }
+
   return {
     props: {
-      data,
+      data: { ...data, longDescription: await serialize(data.longDescription) },
     },
   };
 };

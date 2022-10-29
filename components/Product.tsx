@@ -1,8 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Rating } from "./Rating";
-import ReactMarkdown from "react-markdown";
 import { NextSeo } from "next-seo";
+import { ShopReactMarkDown } from "./ShopMarkdown";
+import { MDXRemote } from "next-mdx-remote";
+import { MarkdownResult } from "../utils";
+import { useCartState } from "./../components/Cart/CartContext";
 
 interface ProductDetails {
   id: number;
@@ -10,7 +13,7 @@ interface ProductDetails {
   title: string;
   urlAdres: string;
   rating: number;
-  longDescription: string;
+  longDescription: MarkdownResult;
 }
 
 interface ProductProps {
@@ -51,7 +54,7 @@ export const ProductDetails = ({ data }: ProductProps) => {
       <h2 className="p-4 text-3xl font-bold">{data.title}</h2>
       <p className="p-4">{data.description}</p>
       <article className="p-4 prose lg:prose-xl">
-        <ReactMarkdown className="p-4">{data.longDescription}</ReactMarkdown>
+        <MDXRemote {...data.longDescription} />
       </article>
       <Rating rating={data.rating} />
     </>
@@ -65,6 +68,8 @@ interface ProductListItemProps {
 }
 
 export const ProductListItem = ({ data }: ProductListItemProps) => {
+  const cartState = useCartState();
+
   return (
     <>
       <div className="bg-white p-4">
@@ -82,6 +87,19 @@ export const ProductListItem = ({ data }: ProductListItemProps) => {
           <h2 className="p-4 text-3xl font-bold">{data.title}</h2>
         </a>
       </Link>
+      <button
+        className=""
+        onClick={() => {
+          cartState.addItemToCart({
+            id: data.id,
+            price: 21,
+            title: data.title,
+            count: 1,
+          });
+        }}
+      >
+        Add to Shop
+      </button>
     </>
   );
 };

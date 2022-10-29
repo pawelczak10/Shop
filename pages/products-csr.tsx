@@ -36,25 +36,25 @@ const ProductsCsrPage = () => {
   if(!result.data || result.error){
     return <div>Something went wrong!</div>
   }
-    return (
-      <ul className="grid grid-col-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        {result.data.map((product) => {
-          return (
-            <li key={product.id} className="shadow-xl border-2">
-              <ProductDetails data={{
-                id: product.id,
-                title: product.title,
-                description: product.description,
-                urlAdres: product.image,
-                rating: product.rating.rate,
-                longDescription: product.longDescription
+    // return (
+    //   <ul className="grid grid-col-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+    //     {result.data.map((product) => {
+    //       return (
+    //         <li key={product.id} className="shadow-xl border-2">
+    //           <ProductDetails data={{
+    //             id: product.id,
+    //             title: product.title,
+    //             description: product.description,
+    //             urlAdres: product.image,
+    //             rating: product.rating.rate,
+    //             longDescription: product.longDescription
                 
-              }} />
-            </li>
-          );
-        })}
-      </ul>
-    );
+    //           }} />
+    //         </li>
+    //       );
+    //     })}
+    //   </ul>
+    // );
   };
 export default ProductsCsrPage;
 
