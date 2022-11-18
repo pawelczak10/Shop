@@ -3,9 +3,13 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains:["picsum.photos", "naszsklep-api.vercel.app"],
-    formats:["image/avif", "image/webp"]
+    domains: [
+      "picsum.photos",
+      "naszsklep-api.vercel.app",
+      "media.graphassets.com",
+    ],
+    formats: ["image/avif", "image/webp"],
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
