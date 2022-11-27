@@ -4,12 +4,14 @@ import { ProductListItem } from "../components/Product";
 import { Main } from "../components/Main";
 import { gql, useQuery } from "@apollo/client";
 import { apolloClient } from "../graphql/apolloClient";
+import Newsletterform from "../components/NewletterForm";
 import {
   CreateProductReviesDocument,
   CreateProductReviesMutation,
   CreateProductReviesMutationVariables,
   GetProductDetailsQueryVariables,
 } from "../src/gql/graphql";
+import { ProductReviewList } from "../components/ProductReviewList";
 
 const Home = () => {
   const addReview = async () => {
@@ -38,6 +40,7 @@ const Home = () => {
           add comment
         </button>
       </form>
+      <Newsletterform />
     </Main>
   );
 };

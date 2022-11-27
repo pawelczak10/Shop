@@ -27,6 +27,7 @@ const ProductIdPages = ({
           description: data.description,
           rating: 5,
           longDescription: data.longDescription,
+          slug: data.slug,
         }}
       />
     </div>
@@ -67,6 +68,7 @@ export const getStaticProps = async ({
         product(where: { id: $id }) {
           name
           price
+          slug
           description
           images {
             url
@@ -76,7 +78,7 @@ export const getStaticProps = async ({
     `,
   });
 
-  if (!data) {
+  if (!data.product) {
     return {
       props: {},
       notFound: true,

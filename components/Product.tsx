@@ -6,6 +6,7 @@ import { ShopReactMarkDown } from "./ShopMarkdown";
 import { MDXRemote } from "next-mdx-remote";
 import { MarkdownResult } from "../utils";
 import { useCartState } from "./../components/Cart/CartContext";
+import  {ProductReviewList}  from "./ProductReviewList";
 
 interface ProductDetails {
   id: string;
@@ -14,6 +15,7 @@ interface ProductDetails {
   urlAdres: string;
   rating: number;
   longDescription: MarkdownResult;
+  slug: string;
 }
 
 interface ProductProps {
@@ -57,6 +59,7 @@ export const ProductDetails = ({ data }: ProductProps) => {
         <MDXRemote {...data.longDescription} />
       </article>
       <Rating rating={data.rating} />
+      <ProductReviewList productSlug={data.slug} />
     </>
   );
 };
