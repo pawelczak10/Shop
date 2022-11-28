@@ -11,7 +11,7 @@ import {
   CreateProductReviesMutationVariables,
   GetProductDetailsQueryVariables,
 } from "../src/gql/graphql";
-import { ProductReviewList } from "../components/ProductReviewList";
+import { ProductReviewList } from "../components/ProductReview/ProductReviewList";
 
 const Home = () => {
   const addReview = async () => {
