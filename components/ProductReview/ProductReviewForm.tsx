@@ -39,38 +39,38 @@ export const ProductReviewForm = ({ productSlug }: ProductReviewFormProps) => {
 
   const [createReview, { data, loading, error }] =
     useCreateProductReviesMutation({
-      refetchQueries: [
-        {
-          query: GetReviewsForProductSlugDocument,
-          variables: { slug: productSlug },
+    //   refetchQueries: [
+    //     {
+    //       query: GetReviewsForProductSlugDocument,
+    //       variables: { slug: productSlug },
+    //     },
+    //   ],
+        update(cache, result) {
+          const orginalReviewsQuery =
+            cache.readQuery<GetReviewsForProductSlugQuery>({
+              query: GetReviewsForProductSlugDocument,
+              variables: { slug: productSlug },
+            });
+          if (!orginalReviewsQuery?.product?.reviews || !result.data?.review) {
+            return;
+          }
+          const newReviewsQuery = {
+            ...orginalReviewsQuery,
+            product: {
+              ...orginalReviewsQuery.product,
+              reviews: [
+                ...orginalReviewsQuery.product.reviews,
+                result.data.review,
+              ],
+            },
+          };
+          console.log(newReviewsQuery);
+          cache.writeQuery({
+            query: GetReviewsForProductSlugDocument,
+            variables: { slug: productSlug },
+            data: newReviewsQuery,
+          });
         },
-      ],
-      //   update(cache, result) {
-      //     const orginalReviewsQuery =
-      //       cache.readQuery<GetReviewsForProductSlugQuery>({
-      //         query: GetReviewsForProductSlugDocument,
-      //         variables: { slug: productSlug },
-      //       });
-      //     if (!orginalReviewsQuery?.product?.reviews || !result.data?.review) {
-      //       return;
-      //     }
-      //     const newReviewsQuery = {
-      //       ...orginalReviewsQuery,
-      //       product: {
-      //         ...orginalReviewsQuery.product,
-      //         reviews: [
-      //           ...orginalReviewsQuery.product.reviews,
-      //           result.data.review,
-      //         ],
-      //       },
-      //     };
-      //     console.log(newReviewsQuery);
-      //     cache.writeQuery({
-      //       query: GetReviewsForProductSlugDocument,
-      //       variables: { slug: productSlug },
-      //       data: newReviewsQuery,
-      //     });
-      //   },
     });
 
   const onSubmit = handleSubmit((data) => {
@@ -86,14 +86,14 @@ export const ProductReviewForm = ({ productSlug }: ProductReviewFormProps) => {
           },
         },
       },
-      //   optimisticResponse: {
-      //     __typename: "Mutation",
-      //     review: {
-      //       __typename: "Review",
-      //       id: (-Math.random()).toString(),
-      //       ...data,
-      //     },
-      //   },
+        optimisticResponse: {
+          __typename: "Mutation",
+          review: {
+            __typename: "Review",
+            id: (-Math.random()).toString(),
+            ...data,
+          },
+        },
     });
   });
   return (
