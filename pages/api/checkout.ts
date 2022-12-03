@@ -4,7 +4,8 @@ import { apolloClient } from "../../graphql/apolloClient";
 import { GetProductBySlugDocument, GetProductBySlugQuery, GetProductBySlugQueryVariables } from "../../src/gql/graphql";
 
 const checkoutHandler: NextApiHandler = async (req, res) => {
-    const stripeKey = process.env.STRIPE_SECRET_KEY;
+    // const stripeKey = process.env.STRIPE_SECRET_KEY;
+    const stripeKey = "sk_test_51MAcdFGWaXoXmu0wVHz9B1VpahnQoz16LT9cbxnmbE3HWXeSaJ7p2PgF6V3Kn2NpAGV3PyMk93uUllgVU8SavfkG00pcfKpqlU"
 
     if (!stripeKey) {
         return res.status(500).json({ error: `Something went wrong!` });
