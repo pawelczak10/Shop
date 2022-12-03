@@ -10,7 +10,7 @@ import { ProductReviewList } from "./ProductReview/ProductReviewList";
 import { ProductReviewContainer } from "./ProductReview/ProductReviewContainer";
 
 interface ProductDetails {
-  id: string;
+  id: number;
   description: string;
   title: string;
   urlAdres: string;

@@ -5,7 +5,7 @@ import { getCardItemsFromStorage } from "./cartModal";
 import { setCardItemsInStorage } from "./cartModal";
 
 export interface CartItem {
-  readonly id: string;
+  readonly id: number;
   readonly price: number;
   readonly title: string;
   readonly count: number;

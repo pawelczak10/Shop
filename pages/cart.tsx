@@ -1,8 +1,35 @@
 import { useCartState } from "./../components/Cart/CartContext";
+import { loadStripe } from "@stripe/stripe-js";
+import Stripe from "stripe";
+
+const stripePromise = loadStripe(
+  "pk_test_51MAcdFGWaXoXmu0wQ5IWd0fX5G4RqH9is8FMuiGKYSilWaJk5pgrRIK8yD9V1ZgyEQ5xahNml0LrAwtd053CseGG00zMk9yQUp"
+);
 
 const CartContent = () => {
   const cartState = useCartState();
 
+  const pay = async () => {
+    const stripe = await stripePromise;
+    if (!stripe) {
+      throw new Error("Somothing went wrong");
+    }
+    const res = await fetch("/api/checkout", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(
+        cartState.items.map((cartItem) => {
+          return {
+            id: cartItem.id,
+            count: cartItem.count,
+          };
+        })
+      ),
+    });
+    const { session }: { session: Stripe.Response<Stripe.Checkout.Session> } =
+      await res.json();
+    await stripe.redirectToCheckout({ sessionId: session.id });
+  };
   return (
     <div className="col-span-2">
       <ul className="divide-y divide-gray-200">
@@ -41,6 +68,13 @@ const CartContent = () => {
           </li>
         ))}
       </ul>
+      <button
+        onClick={pay}
+        type="button"
+        className="w-full, bg-indigo-600 border border-transparent rounded-none"
+      >
+        Confirm order
+      </button>
     </div>
   );
 };
