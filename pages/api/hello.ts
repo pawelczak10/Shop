@@ -18,7 +18,6 @@ const handler: NextApiHandler = async (req, res) => {
   if (!MAILERLITE_API_KEY || !MAILERLITE_GROUP_ID) {
     return res.status(500).json({ error: `Something went wrong!` });
   }
-  console.log("TEST")
   console.log(MAILERLITE_API_KEY);
   console.log(MAILERLITE_GROUP_ID);
 
