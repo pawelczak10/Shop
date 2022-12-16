@@ -12,8 +12,17 @@ const useAddToNewsletterMutation = () =>
       body: JSON.stringify({ email }),
     });
   });
+interface NewsLetterFormViewProps {
+  status: "error" | "idle" | "loading" | "success";
+  onSubmit: (FormData: any) => void;
+}
+export const NewsLetterForm = () => {
+  const { mutate, status } = useAddToNewsletterMutation();
 
-const Newsletterform = () => {
+  return <NewsletterformView onSubmit={mutate} status={status} />;
+};
+
+const NewsletterformView = ({ onSubmit, status }: NewsLetterFormViewProps) => {
   const schema = yup
     .object({
       email: yup.string().email().required(),
@@ -25,29 +34,30 @@ const Newsletterform = () => {
     resolver: yupResolver(schema),
   });
 
-  const { mutate } = useAddToNewsletterMutation();
-
-  const onSubmit = handleSubmit((data) => {
-    mutate(data);
-  });
+  const doSubmit = handleSubmit((data) => onSubmit(data));
 
   return (
-    <form className="flex flex-col" onSubmit={onSubmit}>
+    <form className="flex flex-col" onSubmit={doSubmit}>
       <input
         aria-label="Email address"
         type="email"
         required
         {...register("email", { required: "Podaj email" })}
         placeholder="Enter your email"
+        data-testid="email-newsletter-input"
         className="w-full appearance-none px-5 py-3 border border-transparent text-base leading-6 rounded-md text-gray-900 bg-white placeholder-gray-500 focus:outline:none focus:placeholder-gray-400 transition duration-150 ease-in-out"
       />
       <div className="mt-3 rounded-md shadow sm:mt-0 sm:flex-shrink-0">
-        <button className="w-full flex items-center justify-center px-5 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-blue-500 hover:bg-blue-400 transition duration-150 ease-in-out">
+        <button
+          data-testid="email-newsletter-submit"
+          className="w-full flex items-center justify-center px-5 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-blue-500 hover:bg-blue-400 transition duration-150 ease-in-out"
+        >
           Try it & Subscribe
         </button>
       </div>
+      {status === "success" && "wszytsko okej"}
     </form>
   );
 };
 
-export default Newsletterform;
+export default NewsletterformView;
