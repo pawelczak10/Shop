@@ -4,7 +4,7 @@ import { ProductListItem } from "../components/Product";
 import { Main } from "../components/Main";
 import { gql, useQuery } from "@apollo/client";
 import { apolloClient } from "../graphql/apolloClient";
-import Newsletterform from "../components/NewletterForm";
+import NewsletterformView from "../components/NewletterForm";
 import {
   CreateProductReviesDocument,
   CreateProductReviesMutation,
@@ -40,7 +40,7 @@ const Home = () => {
           add comment
         </button>
       </form>
-      <Newsletterform />
+      {/* <NewsletterformView /> */}
     </Main>
   );
 };

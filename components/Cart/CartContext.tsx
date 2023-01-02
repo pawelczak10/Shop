@@ -38,23 +38,7 @@ export const CartStateContextProvider = ({
       value={{
         items: cartItems,
         addItemToCart: (item) => {
-          setCartItems((prevState) => {
-            const existingItem = prevState.find(
-              (existingitem) => existingitem.id === item.id
-            );
-            if (!existingItem) {
-              return [...prevState, item];
-            }
-            return prevState.map((existingItem) => {
-              if (existingItem.id === item.id) {
-                return {
-                  ...existingItem,
-                  count: existingItem.count + 1,
-                };
-              }
-              return existingItem;
-            });
-          });
+          setCartItems((prevState) => withNewCartItem(prevState, item));
         },
         removeItemFromCart: (id) => {
           setCartItems((prevState) => {
@@ -89,3 +73,22 @@ export const useCartState = () => {
   }
   return cartState;
 };
+
+
+export function withNewCartItem(prevState: CartItem[], item: CartItem): CartItem[] {
+  const existingItem = prevState.find(
+    (existingitem) => existingitem.id === item.id
+  );
+  if (!existingItem) {
+    return [...prevState, item];
+  }
+  return prevState.map((existingItem) => {
+    if (existingItem.id === item.id) {
+      return {
+        ...existingItem,
+        count: existingItem.count + 1,
+      };
+    }
+    return existingItem;
+  });
+}

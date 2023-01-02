@@ -55,7 +55,9 @@ const NewsletterformView = ({ onSubmit, status }: NewsLetterFormViewProps) => {
           Try it & Subscribe
         </button>
       </div>
-      {status === "success" && "wszytsko okej"}
+      <p>
+        {status === "success" && "wszytsko okej"}
+      </p>
     </form>
   );
 };
