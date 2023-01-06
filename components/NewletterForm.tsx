@@ -12,17 +12,8 @@ const useAddToNewsletterMutation = () =>
       body: JSON.stringify({ email }),
     });
   });
-interface NewsLetterFormViewProps {
-  status: "error" | "idle" | "loading" | "success";
-  onSubmit: (FormData: any) => void;
-}
-export const NewsLetterForm = () => {
-  const { mutate, status } = useAddToNewsletterMutation();
 
-  return <NewsletterformView onSubmit={mutate} status={status} />;
-};
-
-const NewsletterformView = ({ onSubmit, status }: NewsLetterFormViewProps) => {
+const Newsletterform = () => {
   const schema = yup
     .object({
       email: yup.string().email().required(),
@@ -34,32 +25,34 @@ const NewsletterformView = ({ onSubmit, status }: NewsLetterFormViewProps) => {
     resolver: yupResolver(schema),
   });
 
-  const doSubmit = handleSubmit((data) => onSubmit(data));
+  const { mutate, status } = useAddToNewsletterMutation();
+
+  const onSubmit = handleSubmit((data) => {
+    mutate(data);
+  });
 
   return (
-    <form className="flex flex-col" onSubmit={doSubmit}>
-      <input
-        aria-label="Email address"
-        type="email"
-        required
-        {...register("email", { required: "Podaj email" })}
-        placeholder="Enter your email"
-        data-testid="email-newsletter-input"
-        className="w-full appearance-none px-5 py-3 border border-transparent text-base leading-6 rounded-md text-gray-900 bg-white placeholder-gray-500 focus:outline:none focus:placeholder-gray-400 transition duration-150 ease-in-out"
-      />
-      <div className="mt-3 rounded-md shadow sm:mt-0 sm:flex-shrink-0">
-        <button
-          data-testid="email-newsletter-submit"
-          className="w-full flex items-center justify-center px-5 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-blue-500 hover:bg-blue-400 transition duration-150 ease-in-out"
-        >
-          Try it & Subscribe
-        </button>
+    <>
+      <div className="mx-auto mt-6 w-full max-w-sm rounded-md border bg-transparent focus-within:border-blue-400 focus-within:ring focus-within:ring-blue-300 focus-within:ring-opacity-40 dark:border-gray-700 dark:focus-within:border-blue-300">
+        <form className="flex flex-col md:flex-row" onSubmit={onSubmit}>
+          <input
+            aria-label="Email addres addresss"
+            type="email"
+            required
+            {...register("email", { required: "Podaj email" })}
+            placeholder="Enter your email address"
+            className="m-1 h-10 flex-1 appearance-none border-none bg-transparent px-4 py-2 text-gray-700 placeholder-gray-400 focus:placeholder-transparent focus:outline-none focus:ring-0 dark:text-gray-200"
+          />
+          <div className="mt-3 rounded-md shadow sm:mt-0 sm:flex-shrink-0">
+            <button className="m-1 h-10 transform rounded-md bg-blue-500 px-4 py-2 text-white transition-colors duration-300 hover:bg-blue-400 focus:bg-blue-400 focus:outline-none">
+              Try it & Subscribe
+            </button>
+          </div>
+        </form>
       </div>
-      <p>
-        {status === "success" && "wszytsko okej"}
-      </p>
-    </form>
+      <p>{status === "success" && "Everything went well!"}</p>
+    </>
   );
 };
 
-export default NewsletterformView;
+export default Newsletterform;

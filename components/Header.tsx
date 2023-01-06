@@ -12,7 +12,7 @@ export const Header = () => {
       <nav className=" px-4 py-4 space-x-4 text-lg text-white font-sans">
         <div className="text-white inline-flex  ">
           {session.status === "authenticated" ? (
-            <button onClick={() => signOut()}>Sign out</button>
+            <button onClick={() => signOut()}>Sign out</button> && <CartBar />
           ) : (
             <button onClick={() => signIn()}>Sign in</button>
           )}
@@ -23,7 +23,7 @@ export const Header = () => {
 
       </nav>
 
-      <CartBar />
+
     </header>
   );
 };
