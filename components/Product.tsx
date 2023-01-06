@@ -92,7 +92,7 @@ export const ProductListItem = ({ data }: ProductListItemProps) => {
         </a>
       </Link>
       <button
-        className=""
+        className="m-1 mx-5 h-10 transform rounded-md bg-purple-700 px-4 py-2 text-white transition-colors duration-300 hover:bg-purple-500 focus:bg-purple-500 focus:outline-none"
         onClick={() => {
           cartState.addItemToCart({
             id: data.id,

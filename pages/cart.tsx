@@ -71,7 +71,7 @@ const CartContent = () => {
       <button
         onClick={pay}
         type="button"
-        className="w-full, bg-indigo-600 border border-transparent rounded-none"
+        className=" bg-blue-500 hover:bg-blue-700 rounded	 text-white font-bold py-2 px-4 border border-transparent "
       >
         Confirm order
       </button>
