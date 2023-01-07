@@ -6,6 +6,7 @@ import { serialize } from "next-mdx-remote/serialize";
 import { gql } from "@apollo/client";
 import { apolloClient } from "../../graphql/apolloClient";
 import { ProductIdDocument, ProductIdQuery } from "../../src/gql/graphql";
+import { ProductsDetails } from "../../components/Products";
 
 const ProductIdPages = ({
   data,
@@ -16,10 +17,15 @@ const ProductIdPages = ({
 
   return (
     <div>
-      <Link href="/products">
-        <a>Wroc na strone glowna</a>
-      </Link>
-      <ProductDetails
+      {/* <Link href="/products">
+        <button
+          className="block rounded-lg ml-5 mt-5 hover:bg-black bg-gray-800 focus:ring-offset-2 focus:ring-gray-800 p-3 text-sm text-white"
+          type="submit"
+        >
+          Go back
+        </button>
+      </Link> */}
+      <ProductsDetails
         data={{
           id: data.id,
           title: data.name,
@@ -28,6 +34,7 @@ const ProductIdPages = ({
           rating: 5,
           longDescription: data.longDescription,
           slug: data.slug,
+          price: data.price,
         }}
       />
     </div>
@@ -94,17 +101,3 @@ export const getStaticProps = async ({
     },
   };
 };
-
-interface StoreApiResponse {
-  id: string;
-  title: string;
-  price: number;
-  description: string;
-  category: string;
-  image: string;
-  longDescription: string;
-  rating: {
-    rate: number;
-    count: number;
-  };
-}

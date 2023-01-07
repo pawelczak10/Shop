@@ -33,6 +33,7 @@ const SignupPage = () => {
     });
   });
   if (session.status === "authenticated") {
+    console.log(session.status)
     router.push("/");
     return null;
   }
