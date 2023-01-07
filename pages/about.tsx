@@ -3,21 +3,58 @@ import { Header } from "../components/Header";
 import { Main } from "../components/Main";
 const About = () => {
   return (
-    <div className="flex flex-col min-h-screen">
-      <header className="bg-white dark:bg-gray-900">
-        <div className="container mx-auto px-6 py-16 pt-28 text-center">
-          <div className="mx-auto max-w-lg">
-            <h1 className="text-3xl font-bold text-gray-800 dark:text-white md:text-4xl">Hello, welcome to our interenet shop. Do you want to keep up to date? Sign up for the newsletter</h1>
-            <div className="mx-auto mt-6 w-full max-w-sm rounded-md border bg-transparent focus-within:border-blue-400 focus-within:ring focus-within:ring-blue-300 focus-within:ring-opacity-40 dark:border-gray-700 dark:focus-within:border-blue-300">
-              <form className="flex flex-col md:flex-row">
-                <input type="email" placeholder="Enter your email address" className="m-1 h-10 flex-1 appearance-none border-none bg-transparent px-4 py-2 text-gray-700 placeholder-gray-400 focus:placeholder-transparent focus:outline-none focus:ring-0 dark:text-gray-200" />
-                <button type="button" className="m-1 h-10 transform rounded-md bg-blue-500 px-4 py-2 text-white transition-colors duration-300 hover:bg-blue-400 focus:bg-blue-400 focus:outline-none">Join Us</button>
-              </form>
-            </div>
+    <section>
+      <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-16">
+          <div className="relative h-64 overflow-hidden rounded-lg sm:h-80 lg:order-last lg:h-full">
+            <img
+              alt="code"
+              src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Programming_code.jpg"
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+          </div>
+
+          <div className="lg:py-24">
+            <h2 className="text-3xl font-bold sm:text-4xl">
+              Hey, my name is Paweł.
+            </h2>
+            <h3 className="text-xl font-bold mt-6 ">
+              {" "}
+              I am a frontend developer. Oh this is one of the applications,
+              from my portfolio.
+              <br />
+              At present, the application is being continuously developed by
+              adding new functionalities and modifying the UX in order to
+              provide the best possible user experience.
+            </h3>
+
+            <p className="mt-4 text-gray-600">Greetings Pawel</p>
+
+            <a
+              href="/products"
+              className="mt-8 inline-flex items-center rounded border border-indigo-600 bg-indigo-600 px-8 py-3 text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
+            >
+              <span className="text-sm font-medium"> Get Started </span>
+
+              <svg
+                className="ml-3 h-5 w-5"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
+              </svg>
+            </a>
           </div>
         </div>
-      </header >
-    </div >
+      </div>
+    </section>
   );
 };
 export default About;
