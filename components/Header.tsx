@@ -17,13 +17,14 @@ export const Header = () => {
             <button onClick={() => signIn()}>Sign in</button>
           )}
         </div>
+        {session.status !== "authenticated" ? (
+          <Link href="/signup">Signup</Link>
+        ) : null}
         <Link href="/">Homepage</Link>
         <Link href="/about">About</Link>
         <Link href="/products">Products</Link>
       </nav>
-      {session.status === "authenticated" ? (
-        <CartBar />
-      ) : null}
+      <CartBar />
 
 
     </header>

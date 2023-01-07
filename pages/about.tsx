@@ -20,7 +20,7 @@ const About = () => {
             </h2>
             <h3 className="text-xl font-bold mt-6 ">
               {" "}
-              I am a frontend developer. Oh this is one of the applications,
+              I am a frontend developer. This is one of the applications,
               from my portfolio.
               <br />
               At present, the application is being continuously developed by
